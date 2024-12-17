@@ -139,6 +139,9 @@
     color: #888;
 }
 /* Edit Task */
+.main-form__edit_mode {
+    width: 100%;
+}
 .main-form__input_task:not(.main-form__add_input) {
     display: none;
 }
