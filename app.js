@@ -1,11 +1,9 @@
-const taskInput= document.getElementById("new-task");
-const addButton= document.getElementsByTagName("button")[0];
+const taskInput = document.getElementById("new-task");
+const addButton = document.getElementsByTagName("button")[0];
 const incompleteTaskHolder = document.getElementById("incomplete-tasks");
 const completedTasksHolder = document.getElementById("completed-tasks");
 
-
-
-const createNewTaskElement = function (taskString) {
+const createNewTaskElement = (taskText) => {
     const listItem = document.createElement("div");
     listItem.className = "main-form__item";
 
@@ -15,22 +13,23 @@ const createNewTaskElement = function (taskString) {
 
     const label = document.createElement("label");
     label.className = "main-form__label";
-    label.innerText = taskString;
+    label.innerText = taskText;
 
     const editInput = document.createElement("input");
     editInput.type = "text";
     editInput.className = "main-form__input_task";
+    editInput.style.display = "none";
 
     const editButton = document.createElement("button");
-    editButton.innerText = "Edit";
     editButton.className = "main-form__button main-form__edit";
+    editButton.innerText = "Edit";
 
     const deleteButton = document.createElement("button");
     deleteButton.className = "main-form__button main-form__delete";
-    const deleteButtonImg = document.createElement("img");
-    deleteButtonImg.src = "./remove.svg";
-    deleteButtonImg.alt = "remove";
-    deleteButton.appendChild(deleteButtonImg);
+    const deleteIcon = document.createElement("img");
+    deleteIcon.src = "./remove.svg";
+    deleteIcon.alt = "remove";
+    deleteButton.appendChild(deleteIcon);
 
     listItem.appendChild(checkBox);
     listItem.appendChild(label);
@@ -41,106 +40,77 @@ const createNewTaskElement = function (taskString) {
     return listItem;
 };
 
+const addTask = () => {
+    const taskText = taskInput.value.trim();
+    if (!taskText) {
+        alert("Task cannot be empty!");
+        return;
+    }
 
-
-const addTask = function(){
-    console.log("Add Task...");
-
-    if (!taskInput.value) return;
-    const listItem=createNewTaskElement(taskInput.value);
-
+    const listItem = createNewTaskElement(taskText);
     incompleteTaskHolder.appendChild(listItem);
     bindTaskEvents(listItem, taskCompleted);
 
-    taskInput.value="";
+    taskInput.value = "";
+};
 
-}
+const editTask = function () {
+    const listItem = this.parentNode;
+    const label = listItem.querySelector(".main-form__label");
+    const editInput = listItem.querySelector(".main-form__input_task");
+    const isEditMode = listItem.classList.contains("editMode");
 
-
-const editTask = function(){
-    console.log("Edit Task...");
-    console.log("Change 'edit' to 'save'");
-
-    const listItem=this.parentNode;
-    const editInput=listItem.querySelector('.main-form__input_task');
-    const label=listItem.querySelector(".main-form__label");
-    const editBtn= this;
-    const containsClass=listItem.classList.contains("editMode");
-
-    if (containsClass) {
-        label.innerText=editInput.value;
-        editBtn.innerText="Edit";
+    if (isEditMode) {
+        const newText = editInput.value.trim();
+        if (newText) {
+            label.innerText = newText;
+        }
+        this.innerText = "Edit";
+        label.style.display = "block";
+        editInput.style.display = "none";
     } else {
-        editInput.value=label.innerText;
-        editBtn.innerText="Save";
+        editInput.value = label.innerText;
+        this.innerText = "Save";
+        label.style.display = "none";
+        editInput.style.display = "block";
     }
+
     listItem.classList.toggle("editMode");
 };
 
-const deleteTask = function(){
-    console.log("Delete Task...");
+const deleteTask = function () {
+    const listItem = this.parentNode;
+    listItem.parentNode.removeChild(listItem);
+};
 
-    const listItem=this.parentNode;
-    const ul=listItem.parentNode;
-    ul.removeChild(listItem);
-
-}
-
-const taskCompleted = function(){
-    console.log("Complete Task...");
-    const listItem=this.parentNode;
+const taskCompleted = function () {
+    const listItem = this.parentNode;
     completedTasksHolder.appendChild(listItem);
     bindTaskEvents(listItem, taskIncomplete);
+};
 
-}
-
-
-const taskIncomplete = function(){
-    console.log("Incomplete Task...");
-    const listItem=this.parentNode;
+const taskIncomplete = function () {
+    const listItem = this.parentNode;
     incompleteTaskHolder.appendChild(listItem);
-    bindTaskEvents(listItem,taskCompleted);
-}
+    bindTaskEvents(listItem, taskCompleted);
+};
 
+const bindTaskEvents = (taskListItem, checkBoxHandler) => {
+    const checkBox = taskListItem.querySelector(".main-form__checkbox");
+    const editButton = taskListItem.querySelector(".main-form__edit");
+    const deleteButton = taskListItem.querySelector(".main-form__delete");
 
-
-const ajaxRequest=function(){
-    console.log("AJAX Request");
-}
-
-addButton.onclick = addTask;
-addButton.addEventListener("click",addTask);
-addButton.addEventListener("click",ajaxRequest);
-
-
-const bindTaskEvents=function(taskListItem,checkBoxEventHandler){
-    console.log("bind list item events");
-    const checkBox=taskListItem.querySelector(".main-form__checkbox");
-    const editButton=taskListItem.querySelector(".main-form__edit");
-    const deleteButton=taskListItem.querySelector(".main-form__delete");
-
-    editButton.onclick=editTask;
-    deleteButton.onclick=deleteTask;
-    checkBox.onchange=checkBoxEventHandler;
-}
+    checkBox.onchange = checkBoxHandler;
+    editButton.onclick = editTask;
+    deleteButton.onclick = deleteTask;
+};
 
 for (let i = 0; i < incompleteTaskHolder.children.length; i++) {
     bindTaskEvents(incompleteTaskHolder.children[i], taskCompleted);
 }
 
-
-
-
-//cycle over completedTasksHolder ul list items
 for (let i = 0; i < completedTasksHolder.children.length; i++) {
     bindTaskEvents(completedTasksHolder.children[i], taskIncomplete);
 }
 
-
-
-
-// Issues with usability don't get seen until they are in front of a human tester.
-
-//prevent creation of empty tasks.
-
-//Change edit to save when you are in edit mode.
+addButton.addEventListener("click", addTask);
