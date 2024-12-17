@@ -77,12 +77,13 @@ const deleteTask = function () {
 
 const taskCompleted = function () {
     const listItem = this.parentNode;
+    listItem.classList.add("completed");
     completedTasksHolder.appendChild(listItem);
     bindTaskEvents(listItem, taskIncomplete);
 };
-
 const taskIncomplete = function () {
     const listItem = this.parentNode;
+    listItem.classList.remove("completed");
     incompleteTaskHolder.appendChild(listItem);
     bindTaskEvents(listItem, taskCompleted);
 };

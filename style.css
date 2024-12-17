@@ -158,6 +158,10 @@
 .main-form__label {
     padding-right: 100px;
 }
+.completed .main-form__label {
+    text-decoration: line-through;
+    color: #888;
+}
 @media (max-width:768px) {
     .picture {
         text-align: center;
