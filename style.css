@@ -117,7 +117,6 @@
 }
 .main-form__item > label {
     padding-left: 10px;
-    box-sizing: border-box;
     font-size: 18px;
     width: 226px;
 }
@@ -125,7 +124,8 @@
     width: 226px;
 }
 .main-form__delete{
-    height: 2em;
+    height: 3em;
+    width: 3em;
     transform: rotateZ(45deg);
     transition: transform 200ms ease-in;
 }
@@ -153,6 +153,10 @@
 
 .main-form__edit_mode .main-form__label {
     display: none;
+}
+
+.main-form__label {
+    padding-right: 100px;
 }
 @media (max-width:768px) {
     .picture {
