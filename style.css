@@ -1,8 +1,8 @@
 /* Basic Style */
-body {
+.page {
     background-color: #f8f8f8;
     color: #333;
-    font-family: Lato, sans-serif;
+    font-family: "Lato", sans-serif;
 }
 .picture{
     width: 500px;
@@ -14,7 +14,7 @@ body {
     width: 100%;
 }
 .picture__link {
-    font-family: fantasy, cursive;
+    font-family: "Fantasy", cursive;
     display: flex;
     justify-content: end;
 }
@@ -27,7 +27,7 @@ body {
 .main-form__input_task {
      width: 56%;
      display: inline-block;
-     flex-grow: 1
+     flex-grow: 1;
  }
 
 .main-form__adding_text {
@@ -35,30 +35,33 @@ body {
 }
 .main-form__items {
     margin:0;
-    padding: 0px;
+    padding: 0;
 }
-.main-form__item, .main-form__title {
-    list-style:none;
+.main-form__item,
+.main-form__title {
+    list-style: none;
 }
 
-.main-form__input,.main-form__button {
-    outline:none;
+.main-form__input,
+.main-form__button {
+    outline: none;
 }
 .main-form__button {
     background: none;
-    border: 0px;
+    border: 0;
     color: #888;
     font-size: 15px;
     width: 60px;
-    font-family: Lato, sans-serif;
+    font-family: "Lato", sans-serif;
     cursor: pointer;
 }
 .main-form__button:hover {
     color: #3a3A3a;
+    text-transform: uppercase;
 }
 /* Heading */
 .main-form__title,
-.main-form__new_task[for='new-task'] {
+.main-form__new_task[for="new-task"] {
     color: #333;
     font-weight: 700;
     font-size: 15px;
@@ -76,7 +79,7 @@ body {
     border: 1px solid #ddd;
     background: #fff;
     border-radius: 6px;
-    font-family: Lato, sans-serif;
+    font-family: "Lato", sans-serif;
     color: #888;
 }
 .main-form__input[type="text"]:focus {
@@ -84,7 +87,7 @@ body {
 }
 
 /* New Task */
-.main-form__new_task[for='new-task'] {
+.main-form__new_task[for="new-task"] {
     display: block;
     margin: 0 0 20px;
 }
@@ -119,7 +122,7 @@ body {
     width: 226px;
 }
 .main-form__input_task {
-    width: 226px
+    width: 226px;
 }
 .main-form__delete{
     height: 2em;
@@ -137,16 +140,16 @@ body {
 }
 /* Edit Task */
 .main-form__input_task:not(.main-form__add_input) {
-    display:none
+    display: none;
 }
 
 .main-form__edit_mode .main-form__input_task {
-    display:inline-block;
-    width:224px
+    display: inline-block;
+    width: 224px;
 }
 
 .main-form__edit_mode .main-form__label {
-    display:none;
+    display: none;
 }
 @media (max-width:768px) {
     .picture {
