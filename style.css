@@ -43,6 +43,10 @@
 }
 .main-form__task {
     padding-right: 280px;
+    outline: none;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 6px;
 }
 .main-form__new_task {
     padding-right: 100px;
@@ -65,7 +69,6 @@
 }
 .main-form__button:hover {
     color: #3a3A3a;
-    text-transform: uppercase;
 }
 /* Heading */
 .main-form__title,
@@ -164,7 +167,7 @@
 }
 
 .main-form__label {
-    padding-right: 100px;
+    padding-right: 109px;
 }
 .completed .main-form__label {
     text-decoration: line-through;
