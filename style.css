@@ -47,6 +47,10 @@
     border: 1px solid #ddd;
     background: #fff;
     border-radius: 6px;
+    font-size: 18px;
+    line-height: 18px;
+    font-family: "Lato", sans-serif;
+
 }
 .main-form__new_task {
     padding-right: 100px;
