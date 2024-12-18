@@ -41,7 +41,15 @@
 .main-form__title {
     list-style: none;
 }
-
+.main-form__task {
+    padding-right: 280px;
+}
+.main-form__new_task {
+    padding-right: 100px;
+}
+.main-form__adding_text {
+    margin-top: 20px;
+}
 .main-form__input,
 .main-form__button {
     outline: none;
